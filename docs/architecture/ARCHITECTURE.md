@@ -1,3 +1,6 @@
+**🔍 ZOOM: PRODUCT_MAP → Data Models & Technical Stack**
+
+
 # Intent Gifter - Technical Architecture
 
 **Version:** 1.0

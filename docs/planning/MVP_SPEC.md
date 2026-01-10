@@ -1,5 +1,11 @@
 # Intent Gifter - MVP Specification
 
+**🔍 ZOOM: PRODUCT_MAP → MVP Rules & Constraints**
+
+This document expands on `docs/PRODUCT_MAP.md`
+
+# Intent Gifter - MVP Specification
+
 **Version:** 1.0
 **Last Updated:** January 2026
 

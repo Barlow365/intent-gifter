@@ -1,36 +1,67 @@
 # Intent Gifter
 
-**Intent-Driven Gifting & Preference Resolution Platform**
+| Repo Map | Purpose | Authority |
+| --- | --- | --- |
+| docs/PRODUCT_MAP.md | Canonical product model (preference-first, progress-driven) | Source of truth |
+| docs/MASTER_PLAN.md | End-to-end behavior and execution | Source of truth |
+| docs/ux/WIREFRAMES.md | ESW wireframes for all routes | Derived |
+| docs/ux/SITEMAP.md | Route map tied to PRODUCT_MAP | Derived |
+| docs/planning/MVP_SPEC.md | MVP definition and success criteria | Derived |
+| docs/architecture/ARCHITECTURE.md | Data model + API contracts | Architecture-only |
 
-Help people express what fits them, refine those preferences over time, and move closer to receiving meaningful items—while occasionally unlocking surprises that accelerate fulfillment.
+| System Entities | Description | Persisted? | User-facing label |
+| --- | --- | --- | --- |
+| User | Account with preference profile | Yes | Your Profile |
+| PreferenceSelection | Comparative choice ("Pick 1 of 4") | Yes | Choice |
+| ProgressCredit | Earned credits (never expire) | Yes | Progress Credits |
+| Milestone | 100/200/500 credit thresholds | No (calculated) | Milestone |
+| SurpriseOutcome | Triggered at milestones | Yes (history) | Surprise |
+| CategoryPriority | User-ranked gift categories (1-8) | Yes | Category Order |
+| WishList | Explicit item selections | Yes | Wish List |
+| GiftProfile | Public shareable profile | No (generated) | Gift-Safe Profile |
 
----
+| Routes Index | Mode | Writes | Reads | Wireframe location |
+| --- | --- | --- | --- | --- |
+| / | PUBLIC | None | None | docs/ux/WIREFRAMES.md (Home) |
+| /onboarding | PREFERENCE | Category rankings, first choices | None | docs/ux/WIREFRAMES.md (Onboarding) |
+| /dashboard | PROGRESS | None | Progress, activity | docs/ux/WIREFRAMES.md (Dashboard) |
+| /preferences | PREFERENCE | Preference selections | Progress | docs/ux/WIREFRAMES.md (Comparative Choice) |
+| /wishlist | WISHLIST | Wishlist items | Wishlist | docs/ux/WIREFRAMES.md (Wishlist) |
+| /surprises | SURPRISE | Surprise claims | Milestone status, history | docs/ux/WIREFRAMES.md (Surprise Reveal) |
+| /u/[username] | PROFILE | None | Category priorities, wishlist | docs/ux/WIREFRAMES.md (Public Profile) |
+| /settings | SETTINGS | Account, preferences, privacy | User profile | docs/ux/WIREFRAMES.md (Settings) |
 
-## The Problem
+# CANONICAL PRODUCT TRUTH (NO-DRIFT)
+The system is PREFERENCE-FIRST.
 
-Gifting is broken:
-- **People don't know what to give** - "What do they even want?"
-- **Wishlists go stale** - Added 2 years ago, never updated
-- **Surprises often miss** - "Why would you buy me this?"
-- **Hard-to-shop-for people** - "They say they don't want anything"
+1) Users EXPRESS preferences through comparative choice or explicit selection.
+2) PROGRESS CREDITS are earned through meaningful preference selections.
+3) CREDITS NEVER EXPIRE or reset.
+4) SURPRISES are OPTIONAL ACCELERATORS triggered at milestones (100, 200, 500 credits).
+5) GIFT-SAFE PROFILES show category priorities and boundaries to friends.
+6) PROGRESS ALWAYS CARRIES FORWARD (no losses, no pay-to-win).
 
-**The real issue:** People have preferences, but no way to express them clearly without feeling awkward or demanding.
+Terminology rules:
+- Internal system term: Preference Profile (architecture only).
+- User-facing term: Your Preferences / What Fits You.
+- Credits are NOT money. They're earned through selections, never purchased.
+- Surprises are NOT gambling. They're optional accelerators with transparent odds.
+- Category boundaries are respected: "Never buy me clothing" means NEVER.
 
----
+## Gut Check (Yes/No)
+- Can progress expire? NO
+- Can you lose credits? NO
+- Is surprise required to get items? NO
+- Are odds transparent? YES
+- Can you pay to skip ahead? NO (optional $1 boost max 3/month for acceleration)
+- Is this gambling? NO
 
-## The Solution
+## Core Innovation
+Two ways to express desire:
+- **Explicit Selection**: "I want this specific thing"
+- **Comparative Choice**: "Which of these feels more like me?" (system learns patterns)
 
-Intent Gifter is a **preference-resolution system** where progress always carries forward, boundaries are respected, and surprise is an optional accelerator—never the core mechanic.
-
-### Core Mechanism
-
-1. **Express Preferences** - Select what fits you, or choose between close alternatives
-2. **Earn Progress** - Each meaningful selection earns progress credits
-3. **Refine Over Time** - System learns your taste, fit, boundaries
-4. **Accelerate Fulfillment** - Occasionally unlock surprises (discounts, gifts, boosts)
-
-### Key Principle
-
+## Key Principle
 **This is NOT gambling, NOT a raffle, NOT layaway.**
 
 It's a preference platform where:
@@ -42,211 +73,10 @@ It's a preference platform where:
 
 ---
 
-## Core Innovation
+**Tagline:** Preference-first. Boundary-aware. Progress-driven.
 
-### Two Ways to Express Desire
+**Documentation:** See [docs/PRODUCT_MAP.md](./docs/PRODUCT_MAP.md) for complete feature specifications.
 
-**Mode A: Explicit** - "I want this specific thing"
-**Mode B: Pattern-Based** - "Which of these feels more like me?"
+**Technology Stack:** React + TypeScript + Next.js 14 | Node.js + Express | PostgreSQL + Redis | Stripe
 
-Most platforms only offer Mode A. We recognize that desire doesn't always show up as explicit asking.
-
-By choosing between close alternatives, the system learns:
-- Taste and style preferences
-- Fit and sizing patterns
-- Risk tolerance by category
-- Identity-aligned preferences
-
-### Profile-Level Category Priority
-
-Users rank broad gift categories in order of comfort:
-
-| Category | Example Priority |
-|----------|------------------|
-| Cash / Flexible Credit | #1 (safest) |
-| Food & Drink | #2 |
-| Experiences / Travel | #3 |
-| Home / Lifestyle | #4 |
-| Clothing & Wearables | #5 (risky) |
-| Surprise Me | #6 |
-
-Surprises only come from top-ranked categories. **No unwanted gifts.**
-
----
-
-## Key Features
-
-### 1. Preference Capture
-
-| Method | Description |
-|--------|-------------|
-| **Explicit Selection** | "I want this Nike jacket" |
-| **Comparative Choice** | "Which feels more like you?" (4 options) |
-| **Category Ranking** | Drag-and-drop priority order |
-| **Boundary Setting** | "Never buy me clothes" |
-
-### 2. Progress System
-
-| Element | Description |
-|---------|-------------|
-| **Progress Credits** | Earned through meaningful selections |
-| **Never Expire** | Credits persist forever |
-| **Not Cash** | Can't withdraw, only unlock value |
-| **Transparent** | Always know your progress state |
-
-### 3. Surprise Mechanics (Optional)
-
-| Outcome | Description |
-|---------|-------------|
-| **Previously Selected Item** | Get something you chose |
-| **Sponsor-Provided Item** | Brand-funded gift |
-| **Discount** | Price reduction on wish list item |
-| **Progress Boost** | 2x credits for next selections |
-| **No Physical Item** | Sometimes no item, but progress retained |
-
-**Rules:**
-- No payment required to trigger
-- No "spin" or "roll" framing
-- No loss outcomes
-- Progress always increases
-- Transparent outcome categories
-
-### 4. Gift-Safe Profile
-
-Friends see:
-- What categories are safest
-- Where risk exists
-- What NOT to buy
-- Progress toward specific items
-
-**Result:** Dramatically reduces "why would you buy me this?" moments.
-
----
-
-## Target Users
-
-### Primary
-- **Hard-to-Shop-For People** - "I don't want anything" types
-- **Gift Recipients** - Anyone who receives gifts (birthdays, holidays, etc.)
-- **Thoughtful Gifters** - Friends/family who want to give meaningful gifts
-
-### Secondary
-- **Brands** - Sponsor surprise inventory, gain engagement
-- **Retailers** - Drive demand clarity and purchases
-
----
-
-## Why This Works
-
-| User Benefit | Business Benefit |
-|--------------|------------------|
-| Express preferences without feeling demanding | Collect high-value preference data |
-| Avoid bad gifts | Reduce returns and waste |
-| Optional surprise creates delight | Drive engagement and retention |
-| Progress never lost | Build trust and long-term use |
-| Gift-safe profiles help friends | Network effects (invite friends) |
-
----
-
-## Revenue Model
-
-### Primary Revenue (Early)
-
-- **Optional micro-conversion** ($1-$3) to accelerate progress
-- Framed as intent acceleration, not chance
-- Platform takes a small fee
-
-**Works without brands at launch.**
-
-### Secondary Revenue
-
-- **Brand-funded surprise inventory** - Brands pay for placement
-- **Fulfillment margin** - % of gift completions
-- **Demand clarity** - Brands pay for intent data
-
-### Tertiary Revenue
-
-- **Friend co-funded gift completion** - Group gifting
-- **Transaction fees** - Small % on fulfillment
-
----
-
-## Market Opportunity
-
-- **Global gift retailing market**: $93.2B (2024) → $111.4B (2030) at 3% CAGR
-- **Souvenirs and novelty items**: $41B by 2030 at 2.8% CAGR
-- **Drivers**: E-commerce, personalization, experience-based gifting
-
-**Gap:** No platform combines preference resolution, progress tracking, and surprise mechanics in a non-gambling format.
-
----
-
-## Competitive Advantages
-
-| Advantage | Defensibility |
-|-----------|---------------|
-| **Preference data** | Very High (data moat) |
-| **Non-gambling mechanics** | High (legal clarity) |
-| **Progress = trust** | High (emotional moat) |
-| **Network effects** | High (gift-safe profiles) |
-| **Brand relationships** | High (fulfillment partnerships) |
-
----
-
-## Technology Stack
-
-- **Frontend**: React + TypeScript + Tailwind CSS
-- **Backend**: Node.js + Express or Python + FastAPI
-- **Database**: PostgreSQL + Redis
-- **AI/ML**: Recommendation engine for preference matching
-- **Payments**: Stripe for micro-conversions
-- **Hosting**: Vercel + Railway or AWS
-
----
-
-## Legal & Ethical Design
-
-**Non-negotiable constraints:**
-- ❌ No pay-to-win
-- ❌ No losses
-- ❌ No infinite replay loops
-- ❌ No hidden odds
-- ❌ No forced engagement
-
-**Core principle:** Progress always carries forward. Surprise never replaces progress.
-
-**See:** [LEGAL_COMPLIANCE.md](./LEGAL_COMPLIANCE.md) for full legal analysis.
-
----
-
-## Getting Started
-
-This repository contains comprehensive documentation:
-
-| Document | Description |
-|----------|-------------|
-| [FEATURES.md](./FEATURES.md) | Detailed feature specifications |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | Technical design and system architecture |
-| [ROADMAP.md](./ROADMAP.md) | Phased implementation plan with timelines |
-| [MVP_SPEC.md](./MVP_SPEC.md) | Minimum viable product definition |
-| [MARKET_ANALYSIS.md](./MARKET_ANALYSIS.md) | Market research and competitive analysis |
-| [LEGAL_COMPLIANCE.md](./LEGAL_COMPLIANCE.md) | Legal safeguards and regulatory compliance |
-
----
-
-## Status
-
-**Phase:** Documentation and Planning
-**Next Milestone:** MVP Development + Legal Review
-
----
-
-## One-Line Test
-
-If this sentence feels intuitive, the system is aligned:
-
-> "This helps me clarify what fits me, avoid bad gifts, and sometimes get what I want sooner than expected."
-
----
-
-**Preference-first. Boundary-aware. Progress-driven.**
+**Status:** Ready for Development

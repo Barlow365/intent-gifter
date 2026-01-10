@@ -1,3 +1,6 @@
+**🔍 ZOOM: PRODUCT_MAP → Detailed Feature Specifications**
+
+
 # Intent Gifter - Features Guide
 
 **Comprehensive Feature Specifications**
