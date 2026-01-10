@@ -10,250 +10,116 @@ The system is PREFERENCE-FIRST.
 5) GIFT-SAFE PROFILES show category priorities and boundaries to friends.
 6) PROGRESS ALWAYS CARRIES FORWARD (no losses, no pay-to-win).
 
-Terminology rules:
-- PREFERENCE PROFILE is the core object (internal).
-- User-facing: "Your Preferences" / "What Fits You".
-- Credits are NOT money. They're earned through selections, never purchased.
-- Surprises are NOT gambling. They're optional accelerators with transparent odds.
-- Wishlist is explicit intent. Public Profile is gift-safe sharing.
-
 If any document or wireframe conflicts with this model, it is WRONG and must be rewritten to match.
 
 # EXECUTABLE STRUCTURAL WIREFRAMES (ESW)
 Wireframe standard:
 - Explicit, column-based ASCII schematics with vertical rails.
-- Every wireframe includes: HEADER line, MODE indicator (PREFERENCE / PROGRESS / WISHLIST / SURPRISE), 2-3 columns where relevant.
+- Every wireframe includes: HEADER line, MODE indicator, 2-3 columns where relevant.
 - Required symbols: [ ] pending, [x] confirmed, [>] active, [?] suggested.
 - Every wireframe answers: Where does preference live? What moves progress forward?
 
-All wireframes in this repo must follow ONE visual grammar:
-- Use vertical rails, section blocks, and column layouts.
-- Use the Inkwell-style planning layout.
-- Do NOT introduce boxed UI mockups, new ASCII art styles, or different layout conventions.
-- Every wireframe must be a zoom of the same canonical system:
-  PREFERENCE PROFILE → PROGRESS CREDITS → COMPARATIVE CHOICE → WISHLIST → SURPRISES → PUBLIC PROFILE
-
-Required conventions:
-- Each wireframe must include:
-  - HEADER line
-  - Page/Mode name
-  - 2-3 column layout where relevant
-  - Clear section headings (ALL CAPS)
-- Symbols:
-  [ ] pending / not selected
-  [x] confirmed / selected / completed
-  [>] active / in-progress
-  [?] suggested / stubbed
-- Every screen must clearly indicate whether it operates on:
-  (A) PREFERENCE PROFILE
-  (B) PROGRESS CREDITS
-  (C) COMPARATIVE CHOICE
-  (D) WISHLIST
-  (E) SURPRISE
-
-If any wireframe is not traceable to this system, rewrite or delete it.
-
-
-================================================================================
-WIREFRAME LEGEND
-================================================================================
-| Symbols: [ ] pending | [x] confirmed | [>] active | [?] suggested
+## Route Catalog
+| Route | Mode | Purpose | Key actions | State transitions |
+| --- | --- | --- | --- | --- |
+| /onboarding | PREFERENCE | Capture category ranking | Drag categories, pick first | Onboarding -> Dashboard |
+| /dashboard | PROGRESS | View progress snapshot | View credits, start choice | Dashboard -> Preferences |
+| /preferences | PREFERENCE | Comparative choice | Pick 1 of 4 | Choice -> +10 credits |
+| /wishlist | WISHLIST | Explicit item list | Add/edit items | Item -> +5 credits |
+| /surprises | SURPRISE | Milestone reveal | Click reveal | Milestone -> Outcome |
+| /u/[username] | PROFILE | Gift-safe public view | View priorities, wishlist | Share link |
 
 --------------------------------------------------------------------------------
-HOME PAGE (PUBLIC MARKETING) | MODE: N/A
+ONBOARDING (CATEGORY RANKING) | MODE: PREFERENCE PROFILE
 --------------------------------------------------------------------------------
-/
+/onboarding
 +--------------------------------------------------------------------------------------+
-| HEADER: Logo | How It Works | Features | Pricing | Login | Sign Up                  |
+| HEADER: Onboarding | Step 2 of 3 | Category Ranking                                  |
 +--------------------------------------------------------------------------------------+
-| HERO SECTION                                                                         |
-| +-----------------------------------------------------------------------------------+|
-| | Preference-first. Boundary-aware. Progress-driven.                               ||
-| |                                                                                   ||
-| | Help people express what fits them, refine those preferences over time,          ||
-| | and move closer to receiving meaningful items—while occasionally unlocking       ||
-| | surprises that accelerate fulfillment.                                           ||
-| |                                                                                   ||
-| | [Get Started Free] [See How It Works]                                            ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| HOW IT WORKS (3-STEP VISUAL)                                                         |
-| +---------+ +---------+ +---------+                                                  |
-| | EXPRESS | | EARN    | | RECEIVE |                                                  |
-| | Choose  | | Credits | | Gifts   |                                                  |
-| | between | | through | | that    |                                                  |
-| | options | | choices | | fit you |                                                  |
-| +---------+ +---------+ +---------+                                                  |
-+--------------------------------------------------------------------------------------+
-| FEATURES PREVIEW                                                                     |
-| - No awkward wishlists                                                               |
-| - Progress never expires                                                             |
-| - Friends know what NOT to buy                                                       |
-| - Optional surprises accelerate fulfillment                                          |
-+--------------------------------------------------------------------------------------+
-| FOOTER: Privacy | Terms | Help | Contact                                             |
+| PREFERENCE LOCATION: CATEGORY PRIORITIES   ||| ACTION: Rank categories                     |
+| What kinds of gifts feel safest?           |||                                         |
+| Drag to reorder (top = safest):            ||| PREVIEW:                                    |
+| [≡] Cash / Flexible Credit                 ||| Your Preferences:                           |
+| [≡] Experiences / Travel                   ||| 1. Cash (safest)                            |
+| [≡] Food & Drink                           ||| 2. Experiences                              |
+| [≡] Home / Lifestyle                       ||| 3. Food                                     |
+| [≡] Tech & Gadgets                         ||| ...                                         |
+| [≡] Clothing & Wearables                   |||                                         |
+| [≡] Toys / Games                           ||| Surprises will only come                    |
+| [≡] Surprise Me                            ||| from top-ranked categories                  |
+| ACTION: [Continue] -> First choice         |||                                         |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-SIGNUP / ONBOARDING | MODE: PREFERENCE PROFILE
+ONBOARDING (FIRST CHOICE) | MODE: PREFERENCE PROFILE
 --------------------------------------------------------------------------------
-/signup → /onboarding
+/onboarding (Step 3)
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Onboarding | Step 1 of 3                                      |
+| HEADER: Onboarding | Step 3 of 3 | First Choice                                      |
 +--------------------------------------------------------------------------------------+
-| ONBOARDING FLOW (PROGRESSIVE DISCLOSURE)                                             |
-+--------------------------------------------------------------------------------------+
-| STEP 1: CREATE ACCOUNT                                                               |
-| +-----------------------------------------------------------------------------------+|
-| | Welcome to Intent Gifter                                                          ||
-| |                                                                                   ||
-| | Name:  [_____________________]                                                    ||
-| | Email: [_____________________]                                                    ||
-| | Password: [__________________]                                                    ||
-| |                                                                                   ||
-| | [Continue]                                                                        ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| STEP 2: CATEGORY RANKING (DRAG AND DROP)                                            |
-| +-----------------------------------------------------------------------------------+|
-| | What kinds of gifts feel safest?                                                  ||
-| |                                                                                   ||
-| | Drag these categories in order of comfort (top = safest):                        ||
-| |                                                                                   ||
-| | [≡] Cash / Flexible Credit                                                        ||
-| | [≡] Experiences / Travel                                                          ||
-| | [≡] Food & Drink                                                                  ||
-| | [≡] Home / Lifestyle                                                              ||
-| | [≡] Tech & Gadgets                                                                ||
-| | [≡] Clothing & Wearables                                                          ||
-| | [≡] Toys / Games                                                                  ||
-| | [≡] Surprise Me                                                                   ||
-| |                                                                                   ||
-| | [Back] [Continue]                                                                 ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| STEP 3: FIRST PREFERENCES                                                            |
-| +-----------------------------------------------------------------------------------+|
-| | Let's learn your taste                                                            ||
-| |                                                                                   ||
-| | Which of these feels more like you? (Pick 1)                                     ||
-| |                                                                                   ||
-| | +-----+ +-----+ +-----+ +-----+                                                   ||
-| | | IMG| | IMG| | IMG| | IMG|                                                   ||
-| | | A  | | B  | | C  | | D  |                                                   ||
-| | |    | |    | |    | |    |                                                   ||
-| | +-----+ +-----+ +-----+ +-----+                                                   ||
-| |                                                                                   ||
-| | Category: Home Decor                                                              ||
-| | (3 more rounds to complete setup)                                                ||
-| |                                                                                   ||
-| | [Skip for now] [Select]                                                           ||
-| +-----------------------------------------------------------------------------------+|
+| PREFERENCE LOCATION: COMPARATIVE CHOICE    ||| ACTION: Pick 1 of 4 (+10 credits)          |
+| Which feels more like you?                 |||                                         |
+| +-----+ +-----+ +-----+ +-----+            ||| Progress starts here:                       |
+| |IMG | |IMG | |IMG | |IMG |            ||| [ ] 0 credits                               |
+| | A  | | B  | | C  | | D  |            ||| [>] Pick one                                |
+| |$199| |$249| |$179| |$299|            ||| Next: 100 credits (first milestone)        |
+| +-----+ +-----+ +-----+ +-----+            |||                                         |
+| Category: Home Decor                       |||                                         |
+| ACTION: [Select] -> Earn +10 credits       |||                                         |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-DASHBOARD (MAIN VIEW) | MODE: PREFERENCE PROFILE + PROGRESS CREDITS
+DASHBOARD (MAIN VIEW) | MODE: PROGRESS CREDITS
 --------------------------------------------------------------------------------
 /dashboard
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Dashboard | Profile | Settings | Logout                      |
+| HEADER: Dashboard | 145 Credits | Next Milestone: 200                               |
 +--------------------------------------------------------------------------------------+
-| PROGRESS OVERVIEW                                                                    |
-| +-----------------------------------------------------------------------------------+|
-| | YOUR PROGRESS                                                                     ||
-| |                                                                                   ||
-| | +-------------------------------------------------------------------------------+ ||
-| | | 145 Credits ████████████░░░░░░░░░░░░ Next milestone: 200                     | ||
-| | +-------------------------------------------------------------------------------+ ||
-| |                                                                                   ||
-| | Progress never expires • Earned through preferences • Unlocks surprises          ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| QUICK ACTIONS (3-CARD LAYOUT)                                                        |
-| +--------+ +--------+ +--------+                                                     |
-| | MAKE   | | ADD TO | | VIEW   |                                                     |
-| | CHOICE | | WISH   | | PROFILE|                                                     |
-| |        | | LIST   | |        |                                                     |
-| | Pick 1 | | Add    | | Share  |                                                     |
-| | of 4   | | items  | | with   |                                                     |
-| | +10 cr | | +5 cr  | | friends|                                                     |
-| |        | |        | |        |                                                     |
-| | [Start]| | [Add]  | | [View] |                                                     |
-| +--------+ +--------+ +--------+                                                     |
-+--------------------------------------------------------------------------------------+
-| RECENT ACTIVITY                                                                      |
-| +-----------------------------------------------------------------------------------+|
-| | [X] Comparative Choice - Home Decor (+10 credits) - 2 hours ago                  ||
-| | [X] Added Standing Desk to wishlist (+5 credits) - Yesterday                     ||
-| | [X] Milestone reached: 100 credits (Surprise revealed) - 3 days ago              ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| WISHLIST PREVIEW (TOP 3)                                                             |
-| +---------+ +---------+ +---------+                                                  |
-| |  IMG   | |  IMG   | |  IMG   |                                                  |
-| | Desk   | | Chair  | | Headph.|                                                  |
-| | $749   | | $450   | | $299   |                                                  |
-| +---------+ +---------+ +---------+                                                  |
-| [View Full Wishlist]                                                                 |
+| PREFERENCE LOCATION: PROGRESS DISPLAY       ||| ACTION: Quick actions                      |
+| YOUR PROGRESS:                              |||                                        |
+| 145 Credits ████████████░░░░░░░░░░░░ 200   ||| [Make Choice] -> /preferences              |
+| Progress never expires                      ||| [Add to Wishlist] -> /wishlist             |
+|                                             ||| [View Profile] -> /u/username              |
+| RECENT ACTIVITY:                            |||                                        |
+| [x] Comparative Choice (+10) - 2h ago       ||| WISHLIST PREVIEW:                          |
+| [x] Added Desk to wishlist (+5) - 1d ago    ||| Desk $749  Chair $450  Monitor $350        |
+| [x] Milestone 100 reached - 3d ago          ||| [View Full Wishlist]                       |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-PREFERENCES - COMPARATIVE CHOICE | MODE: PREFERENCE PROFILE + COMPARATIVE CHOICE
+PREFERENCES (COMPARATIVE CHOICE) | MODE: PREFERENCE PROFILE
 --------------------------------------------------------------------------------
 /preferences
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Make a Choice | Dashboard                                    |
+| HEADER: Make a Choice | 145 Credits | 55 to next milestone                          |
 +--------------------------------------------------------------------------------------+
-| COMPARATIVE CHOICE INTERFACE                                                         |
-| +-----------------------------------------------------------------------------------+|
-| | Which of these feels more like you?                                               ||
-| |                                                                                   ||
-| | Category: Clothing & Wearables                                                    ||
-| | Subcategory: Jackets                                                              ||
-| |                                                                                   ||
-| | +-----+ +-----+ +-----+ +-----+                                                   ||
-| | | IMG| | IMG| | IMG| | IMG|                                                   ||
-| | |    | |    | |    | |    |                                                   ||
-| | | A  | | B  | | C  | | D  |                                                   ||
-| | |    | |    | |    | |    |                                                   ||
-| | |$199| |$249| |$179| |$299|                                                   ||
-| | |    | |    | |    | |    |                                                   ||
-| | +-----+ +-----+ +-----+ +-----+                                                   ||
-| | [Tap any to select]                                                               ||
-| |                                                                                   ||
-| | Earns: +10 credits per choice                                                     ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| PROGRESS BAR                                                                         |
-| +-----------------------------------------------------------------------------------+|
-| | 145 Credits ████████████░░░░░░░░░░░░ Next milestone: 200 (55 to go)              ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| ACTIONS                                                                              |
-| [Skip This Round] [None Feel Right] [Select]                                        |
-+--------------------------------------------------------------------------------------+
-| LEARNING OVER TIME                                                                   |
-| You've made 14 choices in Clothing & Wearables                                      |
-| We're learning: Minimalist style, neutral colors, mid-range budget                  |
+| PREFERENCE LOCATION: COMPARATIVE CHOICE     ||| ACTION: Pick 1 (+10 credits)               |
+| Which feels more like you?                  |||                                        |
+| Category: Clothing & Wearables              ||| Progress updates instantly:                |
+| Subcategory: Jackets                        ||| 145 -> 155 credits                         |
+|                                             |||                                        |
+| +-----+ +-----+ +-----+ +-----+             ||| Learning over time:                        |
+| |IMG | |IMG | |IMG | |IMG |             ||| 14 choices in this category                |
+| | A  | | B  | | C  | | D  |             ||| We're learning: Minimalist,                |
+| |$199| |$249| |$179| |$299|             ||| neutral colors, mid-range budget           |
+| +-----+ +-----+ +-----+ +-----+             |||                                        |
+| [Tap any to select]                         |||                                        |
+| ACTION: [Select] -> +10 credits             ||| [Skip This Round] [None Feel Right]        |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-WISHLIST | MODE: WISHLIST
+WISHLIST (EXPLICIT ITEMS) | MODE: WISHLIST
 --------------------------------------------------------------------------------
 /wishlist
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Wishlist | Dashboard                                        |
+| HEADER: Wishlist | 8 Items | $2,447 Total | [Share Link]                            |
 +--------------------------------------------------------------------------------------+
-| WISHLIST OVERVIEW                                                                    |
-| Total Items: 8 | Total Value: $2,447 | Share: [Copy Link]                          |
-+--------------------------------------------------------------------------------------+
-| WISHLIST GRID (VISUAL CARDS)                                                         |
+| PREFERENCE LOCATION: WISHLIST               ||| ACTION: Add/edit items (+5 credits)        |
 | +---------+ +---------+ +---------+ +---------+                                     |
 | |  IMG   | |  IMG   | |  IMG   | |  IMG   |                                     |
 | | Desk   | | Chair  | | Monitor| | Headph.|                                     |
 | | $749   | | $450   | | $350   | | $299   |                                     |
 | | Amazon | | Wayfair| | BestBuy| | Amazon |                                     |
-| |        | |        | |        | |        |                                     |
 | | [Edit] | | [Edit] | | [Edit] | | [Edit] |                                     |
 | | [Del]  | | [Del]  | | [Del]  | | [Del]  |                                     |
 | +---------+ +---------+ +---------+ +---------+                                     |
@@ -261,271 +127,126 @@ WISHLIST | MODE: WISHLIST
 | |  IMG   | |  IMG   | |  IMG   | |  IMG   |                                     |
 | | Lamp   | | Plant  | | Rug    | | Art    |                                     |
 | | $89    | | $45    | | $199   | | $120   |                                     |
-| | Target | | Etsy   | | Wayfair| | Etsy   |                                     |
-| |        | |        | |        | |        |                                     |
 | | [Edit] | | [Edit] | | [Edit] | | [Edit] |                                     |
 | | [Del]  | | [Del]  | | [Del]  | | [Del]  |                                     |
 | +---------+ +---------+ +---------+ +---------+                                     |
-+--------------------------------------------------------------------------------------+
-| ADD ITEM                                                                             |
-| +-----------------------------------------------------------------------------------+|
-| | [+ Add Item]                                                                      ||
-| |                                                                                   ||
-| | Search or paste product link:                                                    ||
-| | [_______________________________________]                                         ||
-| +-----------------------------------------------------------------------------------+|
+| ADD ITEM: [+ Add Item] -> [Search or paste link] -> +5 credits                     |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-SURPRISE REVEAL | MODE: SURPRISE
+SURPRISES (MILESTONE REVEAL) | MODE: SURPRISE
 --------------------------------------------------------------------------------
 /surprises
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Surprises | Dashboard                                        |
+| HEADER: Surprises | Milestone Reached: 200 Credits                                 |
 +--------------------------------------------------------------------------------------+
-| MILESTONE REACHED                                                                    |
-| +-----------------------------------------------------------------------------------+|
-| | Congratulations!                                                                  ||
-| |                                                                                   ||
-| | You've reached 200 credits                                                        ||
-| |                                                                                   ||
-| | Click to see your surprise                                                        ||
-| |                                                                                   ||
-| | [Reveal Surprise]                                                                 ||
-| |                                                                                   ||
-| | Your progress is safe. Credits never expire.                                     ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| AFTER REVEAL (ANIMATION)                                                             |
-| +-----------------------------------------------------------------------------------+|
-| | +-------------------------------------------------------------------------------+ ||
-| | |                                                                               | ||
-| | |                          SURPRISE REVEALED                                    | ||
-| | |                                                                               | ||
-| | |                              [ITEM IMAGE]                                     | ||
-| | |                                                                               | ||
-| | |                        Standing Desk - White Oak                              | ||
-| | |                                $749                                           | ||
-| | |                                                                               | ||
-| | |                From your wishlist! Ships within 3 days.                       | ||
-| | |                                                                               | ||
-| | +-------------------------------------------------------------------------------+ ||
-| |                                                                                   ||
-| | Outcome: Wish List Item (15% probability)                                        ||
-| |                                                                                   ||
-| | Your new credit balance: 200 (carried forward)                                   ||
-| | Next milestone: 500 credits                                                      ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| SURPRISE HISTORY                                                                     |
-| +-----------------------------------------------------------------------------------+|
-| | [X] 200 credits - Wish List Item (Standing Desk) - Today                         ||
-| | [X] 100 credits - Progress Boost (+50 credits) - 2 weeks ago                     ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| TRANSPARENT ODDS                                                                     |
-| +-----------------------------------------------------------------------------------+|
-| | Surprise Outcome Probabilities:                                                   ||
-| | - Progress Boost (+50 credits): 40%                                              ||
-| | - Discount (10% off wish item): 30%                                              ||
-| | - Wish List Item: 15%                                                            ||
-| | - Brand-Funded Item: 10%                                                         ||
-| | - No Physical Item: 5%                                                           ||
-| |                                                                                   ||
-| | All outcomes move you forward. No losses.                                        ||
-| +-----------------------------------------------------------------------------------+|
+| PREFERENCE LOCATION: MILESTONE TRIGGER      ||| ACTION: Reveal surprise                    |
+| MILESTONE REACHED:                          |||                                        |
+| You've reached 200 credits                  ||| TRANSPARENT ODDS:                          |
+| [Reveal Surprise]                           ||| - Progress Boost (+50): 40%                |
+|                                             ||| - Discount (10% off): 30%                  |
+| Your progress is safe.                      ||| - Wish List Item: 15%                      |
+| Credits never expire.                       ||| - Brand Item: 10%                          |
+|                                             ||| - No Physical Item: 5%                     |
+| AFTER REVEAL: ---->                         |||                                        |
+| +-------------------------------------------------------------------------------+   |
+| |                       SURPRISE REVEALED                                       |   |
+| |                          [ITEM IMAGE]                                         |   |
+| |                      Standing Desk - $749                                     |   |
+| |               From your wishlist! Ships in 3 days.                            |   |
+| |                                                                               |   |
+| | Outcome: Wish List Item (15% probability)                                    |   |
+| | New balance: 200 credits (carried forward)                                   |   |
+| | Next milestone: 500 credits                                                  |   |
+| +-------------------------------------------------------------------------------+   |
+| HISTORY: [x] 200 credits - Wish List Item | [x] 100 credits - Progress Boost         |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-PUBLIC PROFILE (GIFT-SAFE SHARING) | MODE: PUBLIC PROFILE
+PUBLIC PROFILE (GIFT-SAFE) | MODE: PUBLIC PROFILE
 --------------------------------------------------------------------------------
 /u/[username]
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Profile: Alex's Gift Profile                                 |
+| HEADER: Alex's Gift Profile | Public View | [Share Link]                            |
 +--------------------------------------------------------------------------------------+
-| PROFILE HEADER                                                                       |
-| +-----------------------------------------------------------------------------------+|
-| | Alex Johnson                                                                      ||
-| |                                                                                   ||
-| | Gift-Safe Profile • Last updated: 2 days ago                                     ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| CATEGORY PRIORITIES (VISUAL)                                                         |
-| +-----------------------------------------------------------------------------------+|
-| | What Alex prefers:                                                                ||
-| |                                                                                   ||
-| | ✓ SAFEST BETS                                                                     ||
-| | 1. Cash / Flexible Credit                                                         ||
-| | 2. Experiences / Travel                                                           ||
-| | 3. Food & Drink                                                                   ||
-| |                                                                                   ||
-| | ⚠ PROCEED WITH CAUTION                                                           ||
-| | 4. Home / Lifestyle                                                               ||
-| | 5. Tech & Gadgets                                                                 ||
-| |                                                                                   ||
-| | ❌ AVOID                                                                          ||
-| | 6. Clothing & Wearables (risky!)                                                  ||
-| | 7. Toys / Games                                                                   ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| WISHLIST (PUBLIC VIEW)                                                               |
-| +---------+ +---------+ +---------+                                                  |
-| |  IMG   | |  IMG   | |  IMG   |                                                  |
-| | Desk   | | Chair  | | Monitor|                                                  |
-| | $749   | | $450   | | $350   |                                                  |
-| | 85%    | | 60%    | | 45%    |                                                  |
-| | funded | | funded | | funded |                                                  |
-| +---------+ +---------+ +---------+                                                  |
-| [View Full Wishlist]                                                                 |
-+--------------------------------------------------------------------------------------+
-| LEARNED PREFERENCES                                                                  |
-| +-----------------------------------------------------------------------------------+|
-| | Alex's Taste:                                                                     ||
-| | - Style: Minimalist, modern                                                       ||
-| | - Colors: Neutral tones, white, black                                            ||
-| | - Budget: Mid-range ($200-$500)                                                  ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| CONTRIBUTE TO WISHLIST                                                               |
-| [Contribute to Desk] [Contribute to Chair] [Contribute to Monitor]                  |
+| PREFERENCE LOCATION: CATEGORY PRIORITIES    ||| ACTION: Friends view gift guidance         |
+| WHAT ALEX PREFERS:                          |||                                        |
+|                                             ||| WISHLIST (PUBLIC VIEW):                    |
+| ✓ SAFEST BETS:                              ||| +---------+ +---------+ +---------+        |
+| 1. Cash / Flexible Credit                   ||| |  IMG   | |  IMG   | |  IMG   |        |
+| 2. Experiences / Travel                     ||| | Desk   | | Chair  | | Monitor|        |
+| 3. Food & Drink                             ||| | $749   | | $450   | | $350   |        |
+|                                             ||| | 85%    | | 60%    | | 45%    |        |
+| ⚠ PROCEED WITH CAUTION:                    ||| | funded | | funded | | funded |        |
+| 4. Home / Lifestyle                         ||| +---------+ +---------+ +---------+        |
+| 5. Tech & Gadgets                           ||| [View Full Wishlist]                       |
+|                                             |||                                        |
+| ❌ AVOID:                                   ||| LEARNED PREFERENCES:                       |
+| 6. Clothing & Wearables (risky!)            ||| Style: Minimalist, modern                  |
+| 7. Toys / Games                             ||| Colors: Neutral, white, black              |
+|                                             ||| Budget: Mid-range ($200-$500)              |
+| ACTION: Friends use this to choose gifts    |||                                        |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-SETTINGS | MODE: PREFERENCE PROFILE
+SETTINGS | MODE: SETTINGS
 --------------------------------------------------------------------------------
 /settings
 +--------------------------------------------------------------------------------------+
-| HEADER: Intent Gifter | Settings | Dashboard                                        |
+| HEADER: Settings | Account | Preferences | Privacy | Notifications                  |
 +--------------------------------------------------------------------------------------+
-| ACCOUNT SETTINGS                                                                     |
-| +-----------------------------------------------------------------------------------+|
-| | Name:  [Alex Johnson______________]                                               ||
-| | Email: [alex@example.com__________]                                               ||
-| | Password: [••••••••] [Change Password]                                            ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| CATEGORY PRIORITIES (EDIT)                                                           |
-| +-----------------------------------------------------------------------------------+|
-| | Drag to reorder:                                                                  ||
-| |                                                                                   ||
-| | [≡] Cash / Flexible Credit                                                        ||
-| | [≡] Experiences / Travel                                                          ||
-| | [≡] Food & Drink                                                                  ||
-| | [≡] Home / Lifestyle                                                              ||
-| | [≡] Tech & Gadgets                                                                ||
-| | [≡] Clothing & Wearables                                                          ||
-| | [≡] Toys / Games                                                                  ||
-| | [≡] Surprise Me                                                                   ||
-| |                                                                                   ||
-| | [Save Changes]                                                                    ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| PRIVACY SETTINGS                                                                     |
-| +-----------------------------------------------------------------------------------+|
-| | Profile Visibility: ○ Public  ● Friends Only  ○ Private                          ||
-| |                                                                                   ||
-| | Show Wishlist Progress: [X] Yes  [ ] No                                          ||
-| | Show Learned Preferences: [X] Yes  [ ] No                                        ||
-| |                                                                                   ||
-| | [Save Privacy Settings]                                                           ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| NOTIFICATIONS                                                                        |
-| +-----------------------------------------------------------------------------------+|
-| | Email Notifications:                                                              ||
-| | [X] Milestone reached                                                             ||
-| | [X] Surprise available                                                            ||
-| | [ ] Weekly progress summary                                                       ||
-| | [ ] Friend contributed to wishlist                                                ||
-| |                                                                                   ||
-| | [Save Notification Preferences]                                                   ||
-| +-----------------------------------------------------------------------------------+|
-+--------------------------------------------------------------------------------------+
-| DANGER ZONE                                                                          |
-| +-----------------------------------------------------------------------------------+|
-| | [Delete Account] (All progress will be lost)                                     ||
-| +-----------------------------------------------------------------------------------+|
+| PREFERENCE LOCATION: USER SETTINGS          ||| ACTION: Update preferences                 |
+| ACCOUNT:                                    |||                                        |
+| Name:  [Alex Johnson______________]         ||| CATEGORY PRIORITIES (EDIT):                |
+| Email: [alex@example.com__________]         ||| [≡] Cash / Flexible Credit                 |
+| Password: [••••••••] [Change]               ||| [≡] Experiences / Travel                   |
+|                                             ||| [≡] Food & Drink                           |
+| PRIVACY:                                    ||| [≡] Home / Lifestyle                       |
+| Profile Visibility:                         ||| [≡] Tech & Gadgets                         |
+| ○ Public  ● Friends Only  ○ Private         ||| [≡] Clothing & Wearables                   |
+|                                             ||| [≡] Toys / Games                           |
+| Show Wishlist Progress: [x] Yes  [ ] No     ||| [≡] Surprise Me                            |
+| Show Learned Preferences: [x] Yes  [ ] No   ||| [Save Changes]                             |
+|                                             |||                                        |
+| NOTIFICATIONS:                              ||| DANGER ZONE:                               |
+| [x] Milestone reached                       ||| [Delete Account]                           |
+| [x] Surprise available                      ||| (All progress will be lost)                |
+| [ ] Weekly progress summary                 |||                                        |
+| ACTION: [Save Settings]                     |||                                        |
 +--------------------------------------------------------------------------------------+
 
 --------------------------------------------------------------------------------
-MOBILE RESPONSIVE CONSIDERATIONS
+MOBILE RESPONSIVE NOTES
 --------------------------------------------------------------------------------
-
-All layouts adapt to mobile with:
-- Single column layout (no side-by-side cards)
-- Touch-friendly tap targets (minimum 44x44px)
-- Hamburger menu for navigation
-- Bottom navigation bar for primary actions
+All layouts stack vertically on mobile:
+- Single column (|||  separators become stacked sections)
+- Bottom navigation: Dashboard | Preferences | Wishlist | Profile
 - Swipe gestures for comparative choice
-- Stack priority over side-by-side where needed
-
-MOBILE DASHBOARD EXAMPLE:
-+----------------------------------+
-| ☰ Intent Gifter          Profile |
-+----------------------------------+
-| YOUR PROGRESS                    |
-| 145 Credits                      |
-| ████████░░░░░░░░ 200             |
-+----------------------------------+
-| MAKE CHOICE                      |
-| Pick 1 of 4 (+10 cr)             |
-| [Start]                          |
-+----------------------------------+
-| ADD TO WISHLIST                  |
-| Add items (+5 cr)                |
-| [Add]                            |
-+----------------------------------+
-| VIEW PROFILE                     |
-| Share with friends               |
-| [View]                           |
-+----------------------------------+
-| RECENT ACTIVITY                  |
-| [X] Comparative Choice (+10)     |
-| [X] Added Desk to wishlist (+5)  |
-+----------------------------------+
-| Dashboard | Preferences | Profile |
-+----------------------------------+
+- Touch-friendly tap targets (44x44px min)
 
 --------------------------------------------------------------------------------
 ANIMATION SPECIFICATIONS
 --------------------------------------------------------------------------------
+SURPRISE REVEAL:
+1. Button expands to full-screen card (0.5s)
+2. Card flips 3D rotation -> reveals outcome
+3. Confetti effect for positive outcomes
+4. Progress bar updates with smooth easing
+5. "Continue" fades in after 2s
 
-SURPRISE REVEAL ANIMATION:
-1. Initial state: "Click to reveal" button centered
-2. On click: Button expands to full-screen card
-3. Card flips with 3D rotation (0.5s duration)
-4. Back of card reveals outcome
-5. Confetti/sparkle effect for positive outcomes
-6. Progress bar updates with smooth animation
-7. "Continue" button fades in after 2s
-
-COMPARATIVE CHOICE SELECTION:
-1. User taps option
-2. Selected card scales up 1.1x
-3. Other cards fade to 50% opacity
-4. Checkmark animates in top-right corner
-5. +10 credits floats up and merges with progress bar
-6. Progress bar fills with smooth easing
-7. Next set of options slides in from right
-
-WISHLIST ADD:
-1. Item card appears with slide-down animation
-2. +5 credits badge pulses
-3. Credits add to progress bar with number count-up
-4. Success toast appears at bottom
+COMPARATIVE CHOICE:
+1. Selected card scales 1.1x
+2. Others fade to 50% opacity
+3. Checkmark animates in
+4. +10 credits floats up -> merges with progress bar
+5. Next set slides in from right
 
 --------------------------------------------------------------------------------
 ACCESSIBILITY NOTES
 --------------------------------------------------------------------------------
-
 - All images have alt text
-- Color contrast ratio minimum 4.5:1 (WCAG AA)
-- Keyboard navigation supported (Tab, Enter, Arrow keys)
-- Screen reader announcements for:
-  - Progress updates ("145 credits earned, 55 to next milestone")
-  - Surprise reveals ("Wish list item unlocked: Standing Desk")
-  - Comparative choice selections ("Option A selected, 10 credits earned")
-- Focus indicators visible on all interactive elements
-- Skip to main content link
+- Color contrast 4.5:1 min (WCAG AA)
+- Keyboard nav (Tab, Enter, Arrow keys)
+- Screen reader announcements for progress updates, surprise reveals, choice selections
+- Focus indicators on all interactive elements
 - ARIA labels on all icon buttons
-- Form validation with clear error messages
